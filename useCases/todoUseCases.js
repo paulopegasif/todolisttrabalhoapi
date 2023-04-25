@@ -12,11 +12,11 @@ const getTarefasDB = async () => {
 
 const addTarefaDB = async (body) => {
     try {
-        const {codigo, titulo} = body;
-        const results = await pool.query(`INSERT INTO tarefas (codigo, titulo)
-                                        values ($1, $2)
+        const {titulo} = body;
+        const results = await pool.query(`INSERT INTO tarefas (titulo)
+                                        values ($1)
                                         RETURNING codigo, titulo`,
-                                        [codigo, titulo]);
+                                        [titulo]);
         const tarefa = results.rows[0];
         return new Tarefa(tarefa.codigo, tarefa.titulo);
 
